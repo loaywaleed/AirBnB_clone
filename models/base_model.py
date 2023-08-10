@@ -7,8 +7,10 @@ import uuid
 from datetime import datetime
 from models import storage
 
+
 class BaseModel:
     """A base class for all other classes"""
+
     def __init__(self, args, kwargs):
         """Instantiation of BaseModel"""
         self.id = str(uuid.uuid4())
@@ -18,7 +20,8 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.item():
                 if key == "created_at" or key == "updated_at":
-                    value = datetime.strptime(value, value, "%Y-%m-%dT%H%M%S.%f")
+                    value = datetime.strptime(
+                        value, value, "%Y-%m-%dT%H%M%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
 
@@ -34,7 +37,7 @@ class BaseModel:
     def to_dict(self):
         """Return a dictionary representation of the instance"""
         dictionary = self.__dict__.copy()
-        dictionary["__class__"] = self.__class__.__name__ 
-        dictionary["created_at"] = self.created_at.isoformat() 
-        dictionary["updated_at"] = self.updated_at.isoformat() 
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
         return dictionary

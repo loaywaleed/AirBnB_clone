@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """File storage module"""
 
-import json
+import json, os
 
 
 class FileStorage():
@@ -21,7 +21,7 @@ class FileStorage():
     def save(self):
         """Saves objects to file"""
         d = {}
-        for key, value in self.__objects.item():
+        for key, value in self.__objects.items():
             d[key] = value.to_dict()
         with open(FileStorage.__file_path, 'w', encoding="utf-8") as my_file:
             json.dump(d, my_file)
@@ -29,10 +29,17 @@ class FileStorage():
     def reload(self):
         """Reloads objects from a file"""
         try:
-            with open(self.__file_path, encoding="utf-8") as my_file:
-                d = json.load(my_file)
-                for key, value in d.items():
-                    cls = value["__class__"]
-                    FileStorage.__objects[key] = eval(cls)(**value)
+            if not os.path.isfile(FileStorage.__file_path):
+                return
+            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+                obj_dict = json.load(f)
+                obj_dict = {k: self.classes()[v["__class__"]](**v)
+                    for k, v in obj_dict.items()}
+                FileStorage.__objects = obj_dict          
         except FileNotFoundError:
             pass
+
+    def classes(self):
+        from models.base_model import BaseModel
+        classes = {"BaseModel": BaseModel}
+        return classes

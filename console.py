@@ -65,6 +65,22 @@ class HBNBCommand(cmd.Cmd):
                 del(storage.all()[key])
                 storage.save()
 
+    def do_all(self, arg):
+        """Prints all string representation of all instances.
+        """
+        if arg != "":
+            words = arg.split(' ')
+            if words[0] not in storage.classes():
+                print("** class doesn't exist **")
+            else:
+                np = [str(obj) for key, obj in storage.all().items()
+                      if type(obj).__name__ == words[0]]
+                print(np)
+        else:
+            new_list = [str(obj) for key, obj in storage.all().items()]
+            print(new_list)
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

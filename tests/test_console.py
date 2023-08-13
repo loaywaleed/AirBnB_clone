@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines unittests for console.py.
+"""Unittests for console.py
 
 Unittest classes:
     TestHBNBCommand_prompting
@@ -12,7 +12,6 @@ Unittest classes:
     TestHBNBCommand_update
 """
 import os
-import sys
 import unittest
 from models import storage
 from models.engine.file_storage import FileStorage

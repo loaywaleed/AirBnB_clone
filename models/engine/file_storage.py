@@ -42,10 +42,17 @@ class FileStorage():
             pass
 
     def classes(self):
+        """Method that returns all the valid classes"""
         from models.base_model import BaseModel
         from models.user import User
-        
-        classes = {"BaseModel": BaseModel, "User": User}
+        from models.state import State
+        from models.amenity import Amenity
+        from models.city import City
+        from models.review import Review
+        from models.place import Place
+
+        classes = {"BaseModel": BaseModel, "User": User, "State": State
+                   , "Amenity": Amenity, "City": City, "Place" : Place, "Review": Review}
         return classes
 
     def attributes(self):

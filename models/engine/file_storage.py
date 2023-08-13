@@ -43,7 +43,9 @@ class FileStorage():
 
     def classes(self):
         from models.base_model import BaseModel
-        classes = {"BaseModel": BaseModel}
+        from models.user import User
+        
+        classes = {"BaseModel": BaseModel, "User": User}
         return classes
 
     def attributes(self):

@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+"""Module that contains Place class"""
 
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
+    """Class that manages places"""
     city_id = ""
     user_id = ""
     name = ""

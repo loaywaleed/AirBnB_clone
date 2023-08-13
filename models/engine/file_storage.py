@@ -51,8 +51,9 @@ class FileStorage():
         from models.review import Review
         from models.place import Place
 
-        classes = {"BaseModel": BaseModel, "User": User, "State": State
-                   , "Amenity": Amenity, "City": City, "Place" : Place, "Review": Review}
+        classes = {"BaseModel": BaseModel, "User": User, "State": State,
+                   "Amenity": Amenity, "City": City, "Place": Place,
+                   "Review": Review}
         return classes
 
     def attributes(self):
